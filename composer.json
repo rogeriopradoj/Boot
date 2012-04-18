@@ -1,9 +1,9 @@
 {
     "name": "Jam/Runner",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "type": "library",
     "description": "A simple application runner.",
-    "keywords": ["ini", "config"],
+    "keywords": ["bootstrap", "runner"],
     "homepage": "https://github.com/JamPHP/Runner",
     "license" : "MIT",
     "authors" : [
