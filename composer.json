@@ -1,0 +1,24 @@
+{
+    "name": "Jam/Runner",
+    "version": "1.0.0",
+    "type": "library",
+    "description": "A simple application runner.",
+    "keywords": ["ini", "config"],
+    "homepage": "https://github.com/JamPHP/Runner",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name": "Henrique Moody",
+            "email": "henriquemoody@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "jam/config": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jam\\Runner": "src"
+        }
+    }
+}
