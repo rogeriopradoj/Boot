@@ -3,14 +3,14 @@
 /**
  * @namespace
  */
-namespace Procman\Runner;
+namespace Jam\Runner;
 
 use Jam\Config\Ini,
-    Procman\Runner\Provider\Provider;
+    Jam\Runner\Provider\Provider;
 
 /**
- * @category   Procman
- * @package    Procman\Runner
+ * @category   Jam
+ * @package    Jam\Runner
  * @author     Henrique Moody <henriquemoody@gmail.com>
  * @since      0.0.1
  */
@@ -83,7 +83,7 @@ class Bootstrap
 
     /**
      * @param   string $namespace
-     * @return  \Procman\Runner\Bootstrap
+     * @return  \Jam\Runner\Bootstrap
      */
     public function addProviderNamespace($namespace)
     {
@@ -114,7 +114,7 @@ class Bootstrap
     /**
      * @throws  \OutOfRangeException
      * @throws  \InvalidArgumentException
-     * @return  \Procman\Runner\Bootstrap
+     * @return  \Jam\Runner\Bootstrap
      */
     public function loadProviders()
     {

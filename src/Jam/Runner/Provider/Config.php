@@ -13,7 +13,7 @@ namespace Jam\Runner\Provider;
  * @author     Henrique Moody <henriquemoody@gmail.com>
  * @since      0.0.1
  */
-class Php implements Provider
+class Config implements Provider
 {
 
     /**
@@ -22,7 +22,7 @@ class Php implements Provider
     private $_config;
 
     /**
-     * @return \Jam\Config\AbstractConfig
+     * @return  \Jam\Config\AbstractConfig
      */
     public function get()
     {
@@ -31,19 +31,10 @@ class Php implements Provider
 
     /**
      * @param   \Jam\Config\AbstractConfig $config
-     * @return  \Jam\Runner\Provider\Php
+     * @return  \Jam\Runner\Provider\Config
      */
     public function init(\Jam\Config\AbstractConfig $config)
     {
-        foreach ($config as $key => $value) {
-            if (!$value instanceof \Jam\Config\AbstractConfig) {
-                ini_set($key, $value);
-                continue;
-            }
-            foreach ($value as $valueKey => $valueData) {
-                ini_set($key . '.' . $valueKey, $valueData);
-            }
-        }
         $this->_config = $config;
         return $this;
     }
