@@ -1,10 +1,10 @@
 <?php
 
 /* Timezone */
-date_default_timezone_set('America/Sao_Paulo');
+date_default_timezone_set('UTC');
 
 /* Autoloader */
-if (!($autoload = @include __DIR__ . '/../vendor/autoload.php')) {
+if (!($autoload = @include __DIR__ . '/vendor/autoload.php')) {
 
     /* Include path */
     set_include_path(implode(PATH_SEPARATOR, array(
@@ -27,4 +27,3 @@ if (!($autoload = @include __DIR__ . '/../vendor/autoload.php')) {
         }
     );
 }
-

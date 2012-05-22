@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Jam\Runner;
 
 use Jam\Config\Ini,
@@ -28,7 +25,7 @@ class Bootstrap
     private $_providerNamespaces = array();
 
     /**
-     * @var \Jam\Config\AbstractConfig
+     * @var \Jam\Config\Ini
      */
     private $_config;
 
@@ -49,7 +46,7 @@ class Bootstrap
     }
 
     /**
-     * @return  \Jam\Config\AbstractConfig
+     * @return  \Jam\Config\Ini
      */
     public function getConfig()
     {
@@ -121,6 +118,7 @@ class Bootstrap
         foreach ($this->getConfig() as $key => $config) {
 
             $provider = null;
+
             foreach ($this->getProviderNamespaces() as $namespace) {
                 $className = $namespace . ucfirst($key);
                 if (class_exists($className)) {
@@ -130,8 +128,7 @@ class Bootstrap
             }
 
             if (null === $provider) {
-                $message = sprintf('There is no provider called by "%s"', $key);
-                throw new \OutOfRangeException($message);
+                continue;
             }
 
             if (!$provider instanceof Provider) {
@@ -139,8 +136,8 @@ class Bootstrap
                 $message = sprintf($message, get_class($provider));
                 throw new \InvalidArgumentException($message);
             }
-
             $this->_providers[$key] = $provider->init($config)->get();
+
         }
         return $this;
     }

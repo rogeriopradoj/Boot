@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Jam\Runner\Provider;
 
 /**
@@ -16,10 +13,10 @@ interface Provider
 {
 
     /**
-     * @param    \Jam\Config\AbstractConfig $config
+     * @param    \Jam\Config\Ini $config
      * @return   \Jam\Runner\Provider\Provider
      */
-    public function init(\Jam\Config\AbstractConfig $config);
+    public function init(\Jam\Config\Ini $config);
 
     /**
      * @return  mixed

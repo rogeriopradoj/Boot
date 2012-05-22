@@ -16,6 +16,9 @@
         "php": ">=5.3.0",
         "jam/config": "*"
     },
+    "require-dev" : {
+        "jam/dataprovider": "*"
+    },
     "autoload": {
         "psr-0": {
             "Jam\\Runner": "src"

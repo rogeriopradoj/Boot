@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Jam\Runner\Provider;
 
 /**
@@ -41,10 +38,10 @@ class AutoloaderPrefix implements Provider
     }
 
     /**
-     * @param   \Jam\Config\AbstractConfig $config
+     * @param   \Jam\Config\Ini $config
      * @return  \Jam\Runner\Provider\AutoloaderPrefix
      */
-    public function init(\Jam\Config\AbstractConfig $config)
+    public function init(\Jam\Config\Ini $config)
     {
         foreach ($config as $namespace  => $path) {
             $this->_prefixes[$namespace] = $path;

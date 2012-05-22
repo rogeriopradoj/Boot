@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @namespace
- */
 namespace Jam\Runner\Provider;
 
 /**
@@ -17,12 +14,12 @@ class Php implements Provider
 {
 
     /**
-     * @var \Jam\Config\AbstractConfig
+     * @var \Jam\Config\Ini
      */
     private $_config;
 
     /**
-     * @return \Jam\Config\AbstractConfig
+     * @return \Jam\Config\Ini
      */
     public function get()
     {
@@ -30,13 +27,13 @@ class Php implements Provider
     }
 
     /**
-     * @param   \Jam\Config\AbstractConfig $config
+     * @param   \Jam\Config\Ini $config
      * @return  \Jam\Runner\Provider\Php
      */
-    public function init(\Jam\Config\AbstractConfig $config)
+    public function init(\Jam\Config\Ini $config)
     {
         foreach ($config as $key => $value) {
-            if (!$value instanceof \Jam\Config\AbstractConfig) {
+            if (!$value instanceof \Jam\Config\Ini) {
                 ini_set($key, $value);
                 continue;
             }
