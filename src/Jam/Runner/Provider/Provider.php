@@ -13,10 +13,10 @@ interface Provider
 {
 
     /**
-     * @param    \Jam\Config\Ini $config
+     * @param    \Jam\Config\Arr $config
      * @return   \Jam\Runner\Provider\Provider
      */
-    public function init(\Jam\Config\Ini $config);
+    public function init(\Jam\Config\Arr $config);
 
     /**
      * @return  mixed

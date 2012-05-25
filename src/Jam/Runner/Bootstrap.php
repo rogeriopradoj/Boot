@@ -134,8 +134,9 @@ class Bootstrap
             if (!$provider instanceof Provider) {
                 $message = '"%s" is not a valid provider class';
                 $message = sprintf($message, get_class($provider));
-                throw new \InvalidArgumentException($message);
+                throw new \UnexpectedValueException($message);
             }
+
             $this->_providers[$key] = $provider->init($config)->get();
 
         }

@@ -38,10 +38,10 @@ class AutoloaderPrefix implements Provider
     }
 
     /**
-     * @param   \Jam\Config\Ini $config
+     * @param   \Jam\Config\Arr $config
      * @return  \Jam\Runner\Provider\AutoloaderPrefix
      */
-    public function init(\Jam\Config\Ini $config)
+    public function init(\Jam\Config\Arr $config)
     {
         foreach ($config as $namespace  => $path) {
             $this->_prefixes[$namespace] = $path;
