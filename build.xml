@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Jam/Runner" default="qa" basedir=".">
+<project name="Jam/Bootstrapper" default="qa" basedir=".">
 
     <property name="source" value="src" />
-    
-    <target name="clean" 
+
+    <target name="clean"
             description="Clean up artifact directories">
         <delete dir="${project.basedir}/build"/>
     </target>
@@ -30,14 +30,14 @@
         <phingcall target="phpunit" />
         <phingcall target="phpcb" />
     </target>
-    
-    <target name="phpunit" 
+
+    <target name="phpunit"
             depends="create"
             description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
         <exec command="phpunit" logoutput="true" />
     </target>
 
-    <target name="pdepend" 
+    <target name="pdepend"
             depends="create"
             description="Generate jdepend.xml and software metrics charts using PHP_Depend">
         <exec command="pdepend
@@ -48,7 +48,7 @@
               logoutput="true" />
     </target>
 
-    <target name="phpmd" 
+    <target name="phpmd"
             depends="create"
             description="Generate pmd.xml using PHPMD">
         <exec command="phpmd
@@ -59,7 +59,7 @@
               logoutput="true" />
     </target>
 
-    <target name="phpcpd" 
+    <target name="phpcpd"
             depends="create"
             description="Generate pmd-cpd.xml using PHPCPD">
         <exec command="phpcpd
@@ -68,7 +68,7 @@
               logoutput="true" />
     </target>
 
-    <target name="phploc" 
+    <target name="phploc"
             depends="create"
             description="Generate phploc.csv">
         <exec command="phploc
@@ -77,7 +77,7 @@
               logoutput="true" />
     </target>
 
-    <target name="phpcs" 
+    <target name="phpcs"
             depends="create"
             description="Generate checkstyle.xml using PHP_CodeSniffer">
         <touch file="${project.basedir}/build/logs/checkstyle.xml" />
@@ -94,10 +94,10 @@
             depends="create"
             description="Generate API documentation using DocBlox">
         <exec command="docblox
-                          project:run 
-                          -d ${source} 
-                          -t ${project.basedir}/build/api 
-                          --title '${phing.project.name}' 
+                          project:run
+                          -d ${source}
+                          -t ${project.basedir}/build/api
+                          --title '${phing.project.name}'
                           --quiet"
               logoutput="true" />
     </target>

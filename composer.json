@@ -1,10 +1,10 @@
 {
-    "name": "Jam/Runner",
-    "version": "0.0.1",
+    "name": "Jam/Bootstrapper",
+    "version": "0.1.0",
     "type": "library",
-    "description": "A simple application runner.",
-    "keywords": ["bootstrap", "runner"],
-    "homepage": "https://github.com/JamPHP/Runner",
+    "description": "A simple application bootstrapper.",
+    "keywords": ["bootstrapper", "php"],
+    "homepage": "https://github.com/JamPHP/Bootstrapper",
     "license" : "MIT",
     "authors" : [
         {
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Jam\\Runner": "src"
+            "Jam\\Bootstrapper": "src"
         }
     }
 }

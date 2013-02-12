@@ -1,0 +1,82 @@
+<?php
+
+namespace Jam\Bootstrapper;
+
+use Jam\Bootstrapper\Provider\Loader;
+
+/**
+ * @author  Henrique Moody <henriquemoody@gmail.com>
+ * @since   0.1.0
+ */
+class Bootstrap
+{
+
+    /**
+     * @var array
+     */
+    private $config;
+
+    /**
+     * @var string
+     */
+    private $environment;
+
+    /**
+     * @var string
+     */
+    private $providerLoader;
+
+    /**
+     * @param string $config
+     * @param string $environment
+     */
+    public function __construct(array $config, $environment)
+    {
+        $this->config = $config;
+        $this->environment = $environment;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    /**
+     * @return \Jam\Bootstrapper\Provider\Loader
+     */
+    public function getProviderLoader()
+    {
+        if (!$this->providerLoader instanceof Loader) {
+            $this->providerLoader = new Loader();
+        }
+
+        return $this->providerLoader;
+    }
+
+    /**
+     * @param  callable[optional] $callback
+     * @return mixed
+     */
+    public function run($callback = null)
+    {
+        $callback = $callback ?: array($this->getProviderLoader(), 'load');
+        if (!is_callable($callback)) {
+            $message = sprintf('"%s" is not a valid callable', print_r($callback, true));
+            throw new \InvalidArgumentException($message);
+        }
+
+        return call_user_func($callback, $this);
+    }
+
+}
