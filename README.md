@@ -1,11 +1,11 @@
-# Jam/Bootstrapper
-[![Build Status](https://secure.travis-ci.org/JamPHP/Bootstrapper.png)](http://travis-ci.org/JamPHP/Bootstrapper)
+# Arara/Boot
+[![Build Status](https://secure.travis-ci.org/Arara/Boot.png)](http://travis-ci.org/Arara/Boot)
 
 Just a simple application bootstrapper.
 
 ## Installation
 
-Packages available on [Packagist](https://packagist.org/packages/Jam/Bootstrapper).
+Packages available on [Packagist](https://packagist.org/packages/Arara/Boot).
 Autoloading with composer is PSR-0 compatible.
 
 ## Usage
@@ -13,9 +13,9 @@ Autoloading with composer is PSR-0 compatible.
 ### Basic usage
 
 ````php
-$config      = array('title' => 'Jam\Bootstrapper');
+$config      = array('title' => 'Arara\Boot');
 $environment = 'demo';
-$bootstrap   = new Jam\Bootstrapper\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
 $bootstrap->run(function ($bootstrap) {
     echo 'Do what you want with ' . $bootstrap->getConfig()['title'] . PHP_EOL;
 });
@@ -26,7 +26,7 @@ $bootstrap->run(function ($bootstrap) {
 ````php
 $config = parse_ini_file('settings.ini');
 $environment = 'demo';
-$bootstrap   = new Jam\Bootstrapper\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
 $bootstrap->run(function ($bootstrap) {
     $content = '';
     switch ($_SERVER['REQUEST_METHOD']) {
@@ -97,7 +97,7 @@ if ($environment == 'dev') {
     $config['php']['display_errors'] = false;
 }
 
-$bootstrap   = new Jam\Bootstrapper\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
 $bootstrap->run();
 
 // America/Sao_Paulo

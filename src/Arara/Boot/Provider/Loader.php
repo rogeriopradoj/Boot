@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -28,7 +28,7 @@ class Loader
 
     /**
      * @param  string $namespace
-     * @return \Jam\Bootstrapper\Provider\Loader
+     * @return \Arara\Boot\Provider\Loader
      */
     public function addNamespace($namespace)
     {
@@ -70,8 +70,8 @@ class Loader
 
     /**
      * @throws UnexpectedValueException
-     * @param  \Jam\Bootstrapper\Bootstrap $bootstrap
-     * @return \Jam\Bootstrapper\Provider\Loader
+     * @param  \Arara\Boot\Bootstrap $bootstrap
+     * @return \Arara\Boot\Provider\Loader
      */
     public function load(Bootstrap $bootstrap)
     {
@@ -91,7 +91,7 @@ class Loader
                 continue;
             }
 
-            if (false === $reflection->implementsInterface('Jam\Bootstrapper\Provider\Provider')) {
+            if (false === $reflection->implementsInterface('Arara\Boot\Provider\Provider')) {
                 $message = sprintf('"%s" is not a valid provider class', $reflection->getName());
                 throw new \UnexpectedValueException($message);
             }

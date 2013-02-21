@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper;
+namespace Arara\Boot;
 
-use Jam\Bootstrapper\Provider\Loader;
+use Arara\Boot\Provider\Loader;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -53,7 +53,7 @@ class Bootstrap
     }
 
     /**
-     * @return \Jam\Bootstrapper\Provider\Loader
+     * @return \Arara\Boot\Provider\Loader
      */
     public function getProviderLoader()
     {

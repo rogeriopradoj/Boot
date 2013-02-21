@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 function spl_autoload_register($callback)
 {
@@ -18,7 +18,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::__construct
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::__construct
      */
     public function testShouldRegisterAutoloaderOnConstructor()
     {
@@ -29,8 +29,8 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::addPrefix
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::getPrefixes
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::addPrefix
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::getPrefixes
      */
     public function testShouldAddAndRetrievePrefixes()
     {
@@ -43,7 +43,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::__construct
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::__construct
      * @depends testShouldAddAndRetrievePrefixes
      */
     public function testShouldAddPrefixesOnConstructor()
@@ -55,7 +55,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::__invoke
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::__invoke
      */
     public function testShouldReturnTheSelfWhenInvoked()
     {
@@ -66,7 +66,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::loadClass
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::loadClass
      */
     public function testShouldNotTryToLoadIfIsNotOnTheSameNamespace()
     {
@@ -81,7 +81,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\AutoloaderPrefix::loadClass
+     * @covers Arara\Boot\Provider\AutoloaderPrefix::loadClass
      */
     public function testShouldLoadClass()
     {

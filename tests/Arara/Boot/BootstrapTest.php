@@ -1,12 +1,12 @@
 <?php
 
-namespace Jam\Bootstrapper;
+namespace Arara\Boot;
 
 class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::__construct
+     * @covers Arara\Boot\Bootstrap::__construct
      */
     public function testMustHaveConfigAndEnvironmentOnConstructor()
     {
@@ -19,7 +19,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::getConfig
+     * @covers Arara\Boot\Bootstrap::getConfig
      */
     public function testShouldGetTheDefinedConfig()
     {
@@ -30,7 +30,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::getEnvironment
+     * @covers Arara\Boot\Bootstrap::getEnvironment
      */
     public function testShouldGetTheDefinedEnvironment()
     {
@@ -41,21 +41,21 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::getProviderLoader
+     * @covers Arara\Boot\Bootstrap::getProviderLoader
      */
     public function testShouldGetAProviderLoader()
     {
         $bootstrap = new Bootstrap(array(), 'live');
 
-        $this->assertInstanceOf('Jam\Bootstrapper\Provider\Loader', $bootstrap->getProviderLoader());
+        $this->assertInstanceOf('Arara\Boot\Provider\Loader', $bootstrap->getProviderLoader());
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::run
+     * @covers Arara\Boot\Bootstrap::run
      */
     public function testShouldRunWithAValidCallback()
     {
-        $bootstrap = $this->getMock('Jam\Bootstrapper\Bootstrap', array('getConfig'), array(), '', false);
+        $bootstrap = $this->getMock('Arara\Boot\Bootstrap', array('getConfig'), array(), '', false);
         $bootstrap->expects($this->once())
                   ->method('getConfig');
         $callback = function ($bootstrap) {
@@ -65,13 +65,13 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::run
+     * @covers Arara\Boot\Bootstrap::run
      */
     public function testShouldRunWithoutAnyCallbackAndLoadProviders()
     {
-        $bootstrap = $this->getMock('Jam\Bootstrapper\Bootstrap', array('getProviderLoader'), array(), '', false);
+        $bootstrap = $this->getMock('Arara\Boot\Bootstrap', array('getProviderLoader'), array(), '', false);
 
-        $loader = $this->getMock('Jam\Bootstrapper\Provider\Loader', array('load'));
+        $loader = $this->getMock('Arara\Boot\Provider\Loader', array('load'));
         $loader->expects($this->once())
                ->method('load')
                ->with($bootstrap);
@@ -84,7 +84,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Bootstrap::run
+     * @covers Arara\Boot\Bootstrap::run
      * @expectedException \InvalidArgumentException
      */
     public function testMustThrowsAnExceptionWhenCallbackIsNotValid()

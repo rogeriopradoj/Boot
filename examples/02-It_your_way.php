@@ -8,7 +8,7 @@ $config = array(
     )
 );
 $environment = 'demo';
-$bootstrap   = new Jam\Bootstrapper\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
 $bootstrap->run(function ($bootstrap) {
     $content = '';
     switch ($_SERVER['REQUEST_METHOD']) {

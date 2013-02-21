@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -18,7 +18,7 @@ class AutoloaderPrefix implements Provider
 
     /**
      * @param array $config
-     * @param \Jam\Bootstrapper\Bootstrap $bootstrap
+     * @param \Arara\Boot\Bootstrap $bootstrap
      */
     public function __construct(array $config, Bootstrap $bootstrap)
     {
@@ -29,7 +29,7 @@ class AutoloaderPrefix implements Provider
     }
 
     /**
-     * @return \Jam\Bootstrapper\Provider\AutoloaderPrefix
+     * @return \Arara\Boot\Provider\AutoloaderPrefix
      */
     public function __invoke()
     {
@@ -39,7 +39,7 @@ class AutoloaderPrefix implements Provider
     /**
      * @param  string $namespace
      * @param  string $path
-     * @return \Jam\Bootstrapper\Provider\AutoloaderPrefix
+     * @return \Arara\Boot\Provider\AutoloaderPrefix
      */
     public function addPrefix($namespace, $path)
     {

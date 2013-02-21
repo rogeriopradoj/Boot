@@ -1,10 +1,10 @@
 {
-    "name": "jam/bootstrapper",
+    "name": "arara/boot",
     "version": "0.1.0",
     "type": "library",
-    "description": "Just a simple application bootstrapper.",
+    "description": "Just a simple application bootstrapper",
     "keywords": ["bootstrapper", "php"],
-    "homepage": "https://github.com/JamPHP/Bootstrapper",
+    "homepage": "https://github.com/Arara/Boot",
     "license" : "MIT",
     "authors" : [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Jam\\Bootstrapper": "src"
+            "Arara\\Boot": "src"
         }
     }
 }

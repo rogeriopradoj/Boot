@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 class LoaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,7 +10,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     private function provider($bootstrap)
     {
         $provider = $this->getMock(
-            'Jam\Bootstrapper\Provider\Provider',
+            'Arara\Boot\Provider\Provider',
             array('__construct', '__invoke'),
             array(array(), $bootstrap),
             '',
@@ -21,18 +21,18 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::__construct
+     * @covers Arara\Boot\Provider\Loader::__construct
      */
     public function testShouldAddADefaultNamespaceOnConstructor()
     {
         $loader = new Loader();
 
-        $this->assertAttributeSame(array('Jam\Bootstrapper\Provider\\'), 'namespaces', $loader);
+        $this->assertAttributeSame(array('Arara\Boot\Provider\\'), 'namespaces', $loader);
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::addNamespace
-     * @covers Jam\Bootstrapper\Provider\Loader::getNamespaces
+     * @covers Arara\Boot\Provider\Loader::addNamespace
+     * @covers Arara\Boot\Provider\Loader::getNamespaces
      * @depends testShouldAddADefaultNamespaceOnConstructor
      */
     public function testShouldAddAndRetrieveNamespacesInReverseOrder()
@@ -43,14 +43,14 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             array(
                 'Foo\Bar',
-                'Jam\Bootstrapper\Provider\\',
+                'Arara\Boot\Provider\\',
             ),
             $loader->getNamespaces()
         );
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::has
+     * @covers Arara\Boot\Provider\Loader::has
      */
     public function testShouldCheckIfLoaderHasAProvider()
     {
@@ -68,7 +68,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::get
+     * @covers Arara\Boot\Provider\Loader::get
      * @depends testShouldCheckIfLoaderHasAProvider
      */
     public function testShouldGetAValidProvider()
@@ -89,7 +89,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::get
+     * @covers Arara\Boot\Provider\Loader::get
      * @depends testShouldCheckIfLoaderHasAProvider
      * @expectedException \OutOfBoundsException
      * @expectedExceptionMessage There is no defined provider called by "Go! Go! Go!"
@@ -101,7 +101,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::load
+     * @covers Arara\Boot\Provider\Loader::load
      */
     public function testShouldNotTryToLoadKeysThatAreNotProviders()
     {
@@ -119,7 +119,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::load
+     * @covers Arara\Boot\Provider\Loader::load
      */
     public function testShouldLoadKeysThatAreValidProviders()
     {
@@ -132,14 +132,14 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new Loader();
         $loader->load($bootstrap);
 
-        $this->assertInstanceOf('Jam\Bootstrapper\Provider\TestProviderOne', $loader->get('testProviderOne'));
-        $this->assertInstanceOf('Jam\Bootstrapper\Provider\TestProviderTwo', $loader->get('testProviderTwo'));
+        $this->assertInstanceOf('Arara\Boot\Provider\TestProviderOne', $loader->get('testProviderOne'));
+        $this->assertInstanceOf('Arara\Boot\Provider\TestProviderTwo', $loader->get('testProviderTwo'));
     }
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Loader::load
+     * @covers Arara\Boot\Provider\Loader::load
      * @expectedException \UnexpectedValueException
-     * @expectedExceptionMessage "Jam\Bootstrapper\Provider\TestNotProvider" is not a valid provider class
+     * @expectedExceptionMessage "Arara\Boot\Provider\TestNotProvider" is not a valid provider class
      */
     public function testShouldThrowsAnExceptionWithInvalidProviders()
     {
@@ -157,7 +157,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 class TestProviderOne implements Provider
 {
 
-    public function __construct(array $config, \Jam\Bootstrapper\Bootstrap $bootstrap)
+    public function __construct(array $config, \Arara\Boot\Bootstrap $bootstrap)
     {
 
     }

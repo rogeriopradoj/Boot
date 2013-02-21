@@ -1,8 +1,8 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -13,7 +13,7 @@ interface Provider
 
     /**
      * @param array $config
-     * @param \Jam\Bootstrapper\Bootstrap $bootstrap
+     * @param \Arara\Boot\Bootstrap $bootstrap
      */
     public function __construct(array $config, Bootstrap $bootstrap);
 

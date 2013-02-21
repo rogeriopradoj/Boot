@@ -1,6 +1,6 @@
 <?php
 
-namespace Jam\Bootstrapper\Provider;
+namespace Arara\Boot\Provider;
 
 $GLOBALS['ini_set'] = array();
 
@@ -9,13 +9,13 @@ function ini_set($varname, $newvalue)
     $GLOBALS['ini_set'][$varname] = $newvalue;
 }
 
-use Jam\Bootstrapper\Bootstrap;
+use Arara\Boot\Bootstrap;
 
 class PhpTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers Jam\Bootstrapper\Provider\Php::__construct
+     * @covers Arara\Boot\Provider\Php::__construct
      */
     public function testShouldDefineIniSettingOnConstructor()
     {
@@ -40,7 +40,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($iniConfig, $GLOBALS['ini_set']);
     }
     /**
-     * @covers Jam\Bootstrapper\Provider\Php::__invoke
+     * @covers Arara\Boot\Provider\Php::__invoke
      */
     public function testShouldRetrieveConfigInvoked()
     {
