@@ -12,34 +12,40 @@ class Php implements Provider
 {
 
     /**
-     * @var array
-     */
-    private $config;
-
-    /**
      * @param array $config
      * @param \Arara\Boot\Bootstrap $bootstrap
      */
     public function __construct(array $config, Bootstrap $bootstrap)
     {
         foreach ($config as $key => $value) {
-            if (!is_array($value)) {
-                ini_set($key, $value);
-                continue;
-            }
-            foreach ($value as $valueKey => $valueData) {
-                ini_set($key . '.' . $valueKey, $valueData);
-            }
+            $this->set($key, $value);
         }
-        $this->config = $config;
     }
 
     /**
-     * @return array
+     * @param  string $key
+     * @param  mixed $value
+     * @return \Arara\Boot\Provider\Php
+     */
+    public function set($key, $value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $subKey => $subValue) {
+                $this->set($key . '.' . $subKey, $subValue);
+            }
+        } else {
+            ini_set($key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return \Arara\Boot\Provider\Php
      */
     public function __invoke()
     {
-        return $this->config;
+        return $this;
     }
 
 }
