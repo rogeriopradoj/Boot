@@ -2,6 +2,25 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
+if (PHP_SAPI == 'cli') {
+    $descriptorSpec = array(
+        0 => array("pipe", "r"),
+        1 => array("pipe", "w"),
+        2 => array("pipe", "w"),
+    );
+
+    $host = 'localhost:8484';
+    $command = PHP_BINARY . ' -S ' . escapeshellarg($host) . ' '  . escapeshellarg(__FILE__);
+    $process = proc_open($command, $descriptorSpec, $pipes);
+    if (!is_resource($process)) {
+        fwrite(STDERR, 'Unable to run: ' . $command . PHP_EOL);
+        exit(1);
+    }
+    fwrite(STDOUT, 'Running server on ' . $host . PHP_EOL);
+    fwrite(STDOUT, 'Press Ctrl-C to quit' . PHP_EOL);
+    exit(0);
+}
+
 $config = array(
     'database' => array(
         'dns' => sprintf('sqlite:%s%s02-It_your_way.sq3', sys_get_temp_dir(), DIRECTORY_SEPARATOR)
