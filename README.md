@@ -17,7 +17,7 @@ $config      = array('title' => 'Arara\Boot');
 $environment = 'demo';
 $bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
 $bootstrap->run(function ($bootstrap) {
-    echo 'Do what you want with ' . $bootstrap->getConfig()['title'] . PHP_EOL;
+    echo 'Do what you want with ' . $bootstrap->getConfig()->title . PHP_EOL;
 });
 ````
 
@@ -31,7 +31,7 @@ $bootstrap->run(function ($bootstrap) {
     $content = '';
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'POST':
-            $pdo = new PDO($bootstrap->getConfig()['db_dns']);
+            $pdo = $bootstrap->getProvider('pdo');
             $pdo->exec(
                 'CREATE TABLE IF NOT EXISTS emails (
                     id INTEGER PRIMARY KEY ASC,
@@ -77,6 +77,7 @@ loader will try to load a provider called by **foo**.
 For now we have following providers:
 
 * autoloaderPrefix: Autoloader of classes (not PSR-0);
+* pdo: Create a PDO instance;
 * php: Defines INI directives.
 
 ### autoloaderPrefix

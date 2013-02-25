@@ -23,6 +23,14 @@ class Config implements \Countable, \Iterator
     }
 
     /**
+     * @see get
+     */
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
+
+    /**
      * @param  string $key
      * @return bool
      */

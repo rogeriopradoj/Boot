@@ -77,6 +77,18 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Arara\Boot\Config::__get
+     */
+    public function testShouldGetValuesWithMagicGetMethod()
+    {
+        $key = 'foo';
+        $data = array($key => array('bar' => range(1, 10), 'baz' => true));
+        $config = new Config($data);
+
+        $this->assertTrue($config->foo->baz);
+    }
+
+    /**
      * @covers Arara\Boot\Config::count
      */
     public function testShouldCountCorrectly()
