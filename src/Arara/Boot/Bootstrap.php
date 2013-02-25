@@ -65,6 +65,15 @@ class Bootstrap
     }
 
     /**
+     * @param  string $name
+     * @return \Arara\Boot\Provider\Provider
+     */
+    public function getProvider($name)
+    {
+        return $this->getProviderLoader()->get($name);
+    }
+
+    /**
      * @param  callable[optional] $callback
      * @return mixed
      */

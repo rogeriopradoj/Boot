@@ -93,4 +93,27 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $bootstrap->run(array(1, 2, 3, 4, 5));
     }
 
+    /**
+     * @covers Arara\Boot\Bootstrap::getProvider
+     */
+    public function testShouldReturnAProviderByName()
+    {
+        $name = 'myProvider';
+        $provider = $this->getMock('Arara\Boot\Provider\Provider', array('__construct',  '__invoke'));
+
+        $bootstrap = new Bootstrap(array(), 'live');
+
+        $loader = $this->getMock('\Arara\Boot\Provider\Loader', array('get'));
+        $loader->expects($this->any())
+               ->method('get')
+               ->with($name)
+               ->will($this->returnValue($provider));
+
+        $property = new \ReflectionProperty($bootstrap, 'providerLoader');
+        $property->setAccessible(true);
+        $property->setValue($bootstrap, $loader);
+
+        $this->assertSame($provider, $bootstrap->getProvider($name));
+    }
+
 }
