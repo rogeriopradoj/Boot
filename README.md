@@ -106,12 +106,30 @@ $bootstrap = new Arara\Boot\Bootstrap(
             'Application_Model' => '/path/of/application/models',
         )
     ),
-    getenv('ENVIRONMENT') ?: 'dev'
+    'demo'
 );
 ````
 
 We are using ``_`` as namespace saparator in this example, but you can use ``\``
 as namespace separator with no problem.
+
+### pdo
+
+Created an instance of PDO.
+
+````php
+$bootstrap = new Arara\Boot\Bootstrap(
+    array(
+        'pdo' => array(
+            'dns' => 'mysql:host=hostname;dbname=database',
+            'username' => 'root',
+            'password' => 'qwert',
+            'options' => array(PDO::ATTR_PERSISTENT => false),
+        )
+    ),
+    'demo'
+);
+````
 
 ### php
 
@@ -120,8 +138,7 @@ This provider can be used to change INI directives.
 #### Example
 
 ````php
-$environment = getenv('ENVIRONMENT') ?: 'dev';
-$config      = array(
+$config = array(
     'php' => array(
         'error_reporting' => E_ALL | E_STRICT,
         'date' => array(
@@ -135,7 +152,7 @@ if ($environment == 'dev') {
     $config['php']['display_errors'] = false;
 }
 
-$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
+$bootstrap = new Arara\Boot\Bootstrap($config, 'demo');
 $bootstrap->run();
 
 // America/Sao_Paulo
