@@ -162,23 +162,27 @@ $bootstrap = new Arara\Boot\Bootstrap(
     ),
     getenv('APPLICATION_ENV') ?: 'dev'
 );
-$bootstrap->run();
+$bootstrap->run(function ($bootstrap) {
 
-/* @var $php Arara\Boot\Provider\Php  */
-$php = $bootstrap->getProvider('php');
-if ($bootstrap->getEnvironment() === 'dev') {
-    $php->set('display_errors', true);
-} else {
-    $php->set('display_errors', false);
-}
+    $bootstrap->getProviderLoader()->load();
 
-// America/Sao_Paulo
-echo ini_get('date.timezone') . PHP_EOL;
+    /* @var $php Arara\Boot\Provider\Php  */
+    $php = $bootstrap->getProvider('php');
+    if ($bootstrap->getEnvironment() === 'dev') {
+        $php->set('display_errors', true);
+    } else {
+        $php->set('display_errors', false);
+    }
 
-// dev environment should displays erros or
-// SOME environment should not displays erros
-echo $bootstrap->getEnvironment() . ' environment should ' .
-     (ini_get('display_errors')? '' : 'not ') . 'displays erros' . PHP_EOL;
+    // America/Sao_Paulo
+    echo ini_get('date.timezone') . PHP_EOL;
+
+    // dev environment should displays erros or
+    // SOME environment should not displays erros
+    echo $bootstrap->getEnvironment() . ' environment should ' .
+         (ini_get('display_errors')? '' : 'not ') . 'displays erros' . PHP_EOL;
+
+});
 ````
 
 Note that ``date`` is an array that will be replaced by the the correct
