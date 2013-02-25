@@ -14,7 +14,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $environment = 'live';
         $bootstrap = new Bootstrap($config, $environment);
 
-        $this->assertAttributeSame($config, 'config', $bootstrap);
+        $this->assertAttributeEquals(new Config($config), 'config', $bootstrap);
         $this->assertAttributeSame($environment, 'environment', $bootstrap);
     }
 
@@ -26,7 +26,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $config = array('foo' => 'bar');
         $bootstrap = new Bootstrap($config, 'live');
 
-        $this->assertSame($config, $bootstrap->getConfig());
+        $this->assertEquals(new Config($config), $bootstrap->getConfig());
     }
 
     /**

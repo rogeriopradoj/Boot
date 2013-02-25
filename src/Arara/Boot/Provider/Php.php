@@ -2,7 +2,8 @@
 
 namespace Arara\Boot\Provider;
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -12,10 +13,10 @@ class Php implements Provider
 {
 
     /**
-     * @param array $config
+     * @param \Arara\Boot\Config $config
      * @param \Arara\Boot\Bootstrap $bootstrap
      */
-    public function __construct(array $config, Bootstrap $bootstrap)
+    public function __construct(Config $config, Bootstrap $bootstrap)
     {
         foreach ($config as $key => $value) {
             $this->set($key, $value);
@@ -29,7 +30,7 @@ class Php implements Provider
      */
     public function set($key, $value)
     {
-        if (is_array($value)) {
+        if (is_array($value) || $value instanceof \Traversable) {
             foreach ($value as $subKey => $subValue) {
                 $this->set($key . '.' . $subKey, $subValue);
             }
