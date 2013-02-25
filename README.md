@@ -88,11 +88,14 @@ Arbitrary autoloader for classes.
 ````
 user@host [/path/of/application/models] $ tree
 .
+└── controllers
+    └── Foo
+        └── Bar.php
 └── models
     └── Foo
         └── Bar.php
 
-2 directories, 1 file
+4 directories, 2 file
 ````
 
 In this case ``/path/of/application/models/Foo/Bat.php`` contains the class
@@ -108,6 +111,11 @@ $bootstrap = new Arara\Boot\Bootstrap(
     ),
     'demo'
 );
+$bootstrap->run();
+
+/* @var $autoloaderPrefix Arara\Boot\Provider\AutoloaderPrefix */
+$autoloaderPrefix = $bootstrap->getProvider('autoloaderPrefix');
+$autoloaderPrefix->addNamespace('Application_Controller', '/path/of/application/controllers');
 ````
 
 We are using ``_`` as namespace saparator in this example, but you can use ``\``
@@ -129,6 +137,11 @@ $bootstrap = new Arara\Boot\Bootstrap(
     ),
     'demo'
 );
+$bootstrap->run();
+
+/* @var $pdo PDO */
+$pdo = $bootstrap->getProvider('pdo');
+$pdo->exe('/** SQL **/');
 ````
 
 ### php
@@ -138,22 +151,26 @@ This provider can be used to change INI directives.
 #### Example
 
 ````php
-$config = array(
-    'php' => array(
-        'error_reporting' => E_ALL | E_STRICT,
-        'date' => array(
-            'timezone' => 'America/Sao_Paulo',
+$bootstrap = new Arara\Boot\Bootstrap(
+    array(
+        'php' => array(
+            'error_reporting' => E_ALL | E_STRICT,
+            'date' => array(
+                'timezone' => 'America/Sao_Paulo',
+            )
         )
-    )
+    ),
+    getenv('APPLICATION_ENV') ?: 'dev'
 );
-if ($environment == 'dev') {
-    $config['php']['display_errors'] = true;
-} else {
-    $config['php']['display_errors'] = false;
-}
-
-$bootstrap = new Arara\Boot\Bootstrap($config, 'demo');
 $bootstrap->run();
+
+/* @var $php Arara\Boot\Provider\Php  */
+$php = $bootstrap->getProvider('php');
+if ($bootstrap->getEnvironment() === 'dev') {
+    $php->set('display_errors', true);
+} else {
+    $php->set('display_errors', false);
+}
 
 // America/Sao_Paulo
 echo ini_get('date.timezone') . PHP_EOL;
