@@ -79,7 +79,45 @@ For now we have following providers:
 * autoloaderPrefix: Autoloader of classes (not PSR-0);
 * php: Defines INI directives.
 
+### autoloaderPrefix
+
+Arbitrary autoloader for classes.
+
+#### Example
+
+````
+user@host [/path/of/application/models] $ tree
+.
+└── models
+    └── Foo
+        └── Bar.php
+
+2 directories, 1 file
+````
+
+In this case ``/path/of/application/models/Foo/Bat.php`` contains the class
+``Application_Model_Foo_Bar``, in this case to register this path on autoloader
+you can use the following configuration:
+
+````php
+$bootstrap = new Arara\Boot\Bootstrap(
+    array(
+        'autoloaderPrefix' => array(
+            'Application_Model' => '/path/of/application/models',
+        )
+    ),
+    getenv('ENVIRONMENT') ?: 'dev'
+);
+````
+
+We are using ``_`` as namespace saparator in this example, but you can use ``\``
+as namespace separator with no problem.
+
 ### php
+
+This provider can be used to change INI directives.
+
+#### Example
 
 ````php
 $environment = getenv('ENVIRONMENT') ?: 'dev';
@@ -109,6 +147,5 @@ echo $bootstrap->getEnvironment() . ' environment should ' .
      (ini_get('display_errors')? '' : 'not ') . 'displays erros' . PHP_EOL;
 ````
 
-### autoloaderPrefix
-
-Please see the unit tests.
+Note that ``date`` is an array that will be replaced by the the correct
+directives recursively.
