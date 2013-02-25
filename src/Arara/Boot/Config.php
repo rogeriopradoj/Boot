@@ -106,4 +106,12 @@ class Config implements \Countable, \Iterator
         return $this->has($this->key());
     }
 
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
+
 }

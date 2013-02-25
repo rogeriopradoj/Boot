@@ -189,4 +189,15 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($config->valid());
     }
 
+    /**
+     * @covers Arara\Boot\Config::toArray
+     */
+    public function testShouldReturnAVanillaArray()
+    {
+        $data = range(1, 900);
+        $config = new Config($data);
+
+        $this->assertSame($data, $config->toArray());
+    }
+
 }
