@@ -12,7 +12,7 @@ class Bootstrap
 {
 
     /**
-     * @var array
+     * @var Config
      */
     private $config;
 
@@ -32,12 +32,12 @@ class Bootstrap
      */
     public function __construct(array $config, $environment)
     {
-        $this->config = $config;
+        $this->config = new Config($config);
         $this->environment = $environment;
     }
 
     /**
-     * @return array
+     * @return \Arara\Boot\Config
      */
     public function getConfig()
     {

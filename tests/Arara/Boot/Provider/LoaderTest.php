@@ -2,7 +2,8 @@
 
 namespace Arara\Boot\Provider;
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 class LoaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -157,7 +158,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 class TestProviderOne implements Provider
 {
 
-    public function __construct(array $config, \Arara\Boot\Bootstrap $bootstrap)
+    public function __construct(Config $config, \Arara\Boot\Bootstrap $bootstrap)
     {
 
     }
@@ -172,7 +173,7 @@ class TestProviderOne implements Provider
 class TestProviderTwo implements Provider
 {
 
-    public function __construct(array $config, Bootstrap $bootstrap)
+    public function __construct(Config $config, Bootstrap $bootstrap)
     {
 
     }

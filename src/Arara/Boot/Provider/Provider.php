@@ -2,7 +2,8 @@
 
 namespace Arara\Boot\Provider;
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -12,10 +13,10 @@ interface Provider
 {
 
     /**
-     * @param array $config
+     * @param \Arara\Boot\Config $config
      * @param \Arara\Boot\Bootstrap $bootstrap
      */
-    public function __construct(array $config, Bootstrap $bootstrap);
+    public function __construct(Config $config, Bootstrap $bootstrap);
 
     /**
      * @return mixed

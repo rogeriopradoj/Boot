@@ -2,7 +2,8 @@
 
 namespace Arara\Boot\Provider;
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 /**
  * @author  Henrique Moody <henriquemoody@gmail.com>
@@ -17,10 +18,10 @@ class AutoloaderPrefix implements Provider
     private $prefixes = array();
 
     /**
-     * @param array $config
+     * @param \Arara\Boot\Config $config
      * @param \Arara\Boot\Bootstrap $bootstrap
      */
-    public function __construct(array $config, Bootstrap $bootstrap)
+    public function __construct(Config $config, Bootstrap $bootstrap)
     {
         foreach ($config as $namespace  => $path) {
             $this->addPrefix($namespace, $path);

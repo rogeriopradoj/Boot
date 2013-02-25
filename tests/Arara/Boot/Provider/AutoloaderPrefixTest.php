@@ -2,7 +2,8 @@
 
 namespace Arara\Boot\Provider;
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 function spl_autoload_register($callback)
 {
@@ -23,7 +24,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     public function testShouldRegisterAutoloaderOnConstructor()
     {
         $boostrap = new Bootstrap(array(), 'test');
-        $provider = new AutoloaderPrefix(array(), $boostrap);
+        $provider = new AutoloaderPrefix(new Config(array()), $boostrap);
 
         $this->assertSame(array($provider, 'loadClass'), $GLOBALS['spl_autoload_register']);
     }
@@ -35,7 +36,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     public function testShouldAddAndRetrievePrefixes()
     {
         $boostrap = new Bootstrap(array(), 'test');
-        $provider = new AutoloaderPrefix(array(), $boostrap);
+        $provider = new AutoloaderPrefix(new Config(array()), $boostrap);
         $provider->addPrefix(__NAMESPACE__, __DIR__);
 
         $this->assertSame(array(__NAMESPACE__ => __DIR__), $provider->getPrefixes());
@@ -49,7 +50,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     public function testShouldAddPrefixesOnConstructor()
     {
         $boostrap = new Bootstrap(array(), 'test');
-        $provider = new AutoloaderPrefix(array(__NAMESPACE__ => __DIR__), $boostrap);
+        $provider = new AutoloaderPrefix(new Config(array(__NAMESPACE__ => __DIR__)), $boostrap);
 
         $this->assertSame(array(__NAMESPACE__ => __DIR__), $provider->getPrefixes());
     }
@@ -60,7 +61,7 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     public function testShouldReturnTheSelfWhenInvoked()
     {
         $boostrap = new Bootstrap(array(), 'test');
-        $provider = new AutoloaderPrefix(array(), $boostrap);
+        $provider = new AutoloaderPrefix(new Config(array()), $boostrap);
 
         $this->assertSame($provider, $provider());
     }
@@ -72,8 +73,10 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
     {
         $boostrap = new Bootstrap(array(), 'test');
         $provider = new AutoloaderPrefix(
-            array(
-                __NAMESPACE__ => __DIR__
+            new Config(
+                array(
+                    __NAMESPACE__ => __DIR__
+                )
             ),
             $boostrap
         );
@@ -88,8 +91,10 @@ class AutoloaderPrefixTest extends \PHPUnit_Framework_TestCase
         $className = 'Model\\Foo\\Bar';
         $boostrap = new Bootstrap(array(), 'test');
         $provider = new AutoloaderPrefix(
-            array(
-                'Model' => realpath(__DIR__ . '/../../../fixtures/models')
+            new Config(
+                array(
+                    'Model' => realpath(__DIR__ . '/../../../fixtures/models')
+                )
             ),
             $boostrap
         );

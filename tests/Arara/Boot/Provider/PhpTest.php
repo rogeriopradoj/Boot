@@ -9,7 +9,8 @@ function ini_set($varname, $newvalue)
     $GLOBALS['ini_set'][$varname] = $newvalue;
 }
 
-use Arara\Boot\Bootstrap;
+use Arara\Boot\Bootstrap,
+    Arara\Boot\Config;
 
 class PhpTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,7 +35,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
             'date.default_longitude' => $originalConfig['date']['default_longitude'],
         );
 
-        $provider = new Php(array(), new Bootstrap(array(), 'test'));
+        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test'));
         $provider->set('display_erros', $originalConfig['display_erros']);
         $provider->set('date', $originalConfig['date']);
 
@@ -62,7 +63,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
             'date.default_longitude' => $originalConfig['date']['default_longitude'],
         );
 
-        new Php($originalConfig, new Bootstrap(array(), 'test'));
+        new Php(new Config($originalConfig), new Bootstrap(array(), 'test'));
 
         $this->assertSame($iniConfig, $GLOBALS['ini_set']);
     }
@@ -72,7 +73,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldRetrieveInstanceWhenInvoked()
     {
-        $provider = new Php(array(), new Bootstrap(array(), 'test'));
+        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test'));
 
         $this->assertSame($provider, $provider());
     }
