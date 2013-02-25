@@ -1,6 +1,6 @@
 {
     "name": "arara/boot",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "type": "library",
     "description": "Just a simple application bootstrapper",
     "keywords": ["bootstrapper", "php"],
