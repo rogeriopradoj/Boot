@@ -17,7 +17,7 @@ if ($environment == 'dev') {
     $config['php']['display_errors'] = false;
 }
 
-$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment, __DIR__);
 $bootstrap->run();
 
 // America/Sao_Paulo

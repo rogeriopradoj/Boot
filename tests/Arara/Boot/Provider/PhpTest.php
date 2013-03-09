@@ -35,7 +35,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
             'date.default_longitude' => $originalConfig['date']['default_longitude'],
         );
 
-        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test'));
+        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test', __DIR__));
         $provider->set('display_erros', $originalConfig['display_erros']);
         $provider->set('date', $originalConfig['date']);
 
@@ -63,7 +63,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
             'date.default_longitude' => $originalConfig['date']['default_longitude'],
         );
 
-        new Php(new Config($originalConfig), new Bootstrap(array(), 'test'));
+        new Php(new Config($originalConfig), new Bootstrap(array(), 'test', __DIR__));
 
         $this->assertSame($iniConfig, $GLOBALS['ini_set']);
     }
@@ -73,7 +73,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldRetrieveInstanceWhenInvoked()
     {
-        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test'));
+        $provider = new Php(new Config(array()), new Bootstrap(array(), 'test', __DIR__));
 
         $this->assertSame($provider, $provider());
     }

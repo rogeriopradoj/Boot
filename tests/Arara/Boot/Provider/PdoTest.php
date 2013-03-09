@@ -15,7 +15,7 @@ class PdoTest extends \PHPUnit_Framework_TestCase
     public function testShouldFactoryWithDnsOnly()
     {
         $config = new Config(array('dsn' => 'sqlite::memory:'));
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $pdo = new Pdo($config, $bootstrap);
 
         $this->assertAttributeInstanceOf('PDO', 'pdo', $pdo);
@@ -30,7 +30,7 @@ class PdoTest extends \PHPUnit_Framework_TestCase
             'dsn' => 'sqlite::memory:',
             'usename' => null,
         ));
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $pdo = new Pdo($config, $bootstrap);
 
         $this->assertAttributeInstanceOf('PDO', 'pdo', $pdo);
@@ -46,7 +46,7 @@ class PdoTest extends \PHPUnit_Framework_TestCase
             'usename' => null,
             'password' => null,
         ));
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $pdo = new Pdo($config, $bootstrap);
 
         $this->assertAttributeInstanceOf('PDO', 'pdo', $pdo);
@@ -63,7 +63,7 @@ class PdoTest extends \PHPUnit_Framework_TestCase
             'password' => null,
             'options' => array(\PDO::ATTR_PERSISTENT => true),
         ));
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $pdo = new Pdo($config, $bootstrap);
 
         $this->assertAttributeInstanceOf('PDO', 'pdo', $pdo);
@@ -76,17 +76,17 @@ class PdoTest extends \PHPUnit_Framework_TestCase
     public function testShouldThrowsAnExceptionIfOptionsAreNotValid()
     {
         $config = new Config(array());
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         new Pdo($config, $bootstrap);
     }
-    
+
     /**
      * @covers Arara\Boot\Provider\Pdo::__invoke
      */
     public function testShouldReturnPdoObjectionWhenObjectIsInvoked()
     {
         $config = new Config(array('dsn' => 'sqlite::memory:'));
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $pdo = new Pdo($config, $bootstrap);
 
         $this->assertInstanceOf('PDO', $pdo());

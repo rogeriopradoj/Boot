@@ -27,7 +27,7 @@ $config = array(
     )
 );
 $environment = 'demo';
-$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment, __DIR__);
 $bootstrap->run(function ($bootstrap) {
     $content = '';
     switch ($_SERVER['REQUEST_METHOD']) {

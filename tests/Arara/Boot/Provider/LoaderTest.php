@@ -55,7 +55,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldCheckIfLoaderHasAProvider()
     {
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $provider = $this->provider($bootstrap);
         $providerName = 'providerOne';
         $loader = new Loader();
@@ -74,7 +74,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldGetAValidProvider()
     {
-        $bootstrap = new Bootstrap(array(), 'test');
+        $bootstrap = new Bootstrap(array(), 'test', __DIR__);
         $provider = $this->provider($bootstrap);
         $provider->expects($this->once())
                  ->method('__invoke')
@@ -110,7 +110,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             'KeyThatAreNotAProvider' => array(),
             'AnotherKeyThatAreNotAProvider' => array(),
         );
-        $bootstrap = new Bootstrap($config, 'whatever');
+        $bootstrap = new Bootstrap($config, 'whatever', __DIR__);
 
         $loader = new Loader();
         $loader->load($bootstrap);
@@ -128,7 +128,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             'testProviderOne' => array(),
             'testProviderTwo' => array(),
         );
-        $bootstrap = new Bootstrap($config, 'whatever');
+        $bootstrap = new Bootstrap($config, 'whatever', __DIR__);
 
         $loader = new Loader();
         $loader->load($bootstrap);
@@ -147,7 +147,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $config = array(
             'testNotProvider' => array(),
         );
-        $bootstrap = new Bootstrap($config, 'whatever');
+        $bootstrap = new Bootstrap($config, 'whatever', __DIR__);
 
         $loader = new Loader();
         $loader->load($bootstrap);

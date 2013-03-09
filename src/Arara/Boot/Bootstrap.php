@@ -24,16 +24,27 @@ class Bootstrap
     /**
      * @var string
      */
+    private $rootDirectory;
+
+    /**
+     * @var \Arara\Boot\Provider\Loader
+     */
     private $providerLoader;
 
     /**
      * @param string $config
      * @param string $environment
      */
-    public function __construct(array $config, $environment)
+    public function __construct(array $config, $environment, $rootDirectory)
     {
         $this->config = new Config($config);
         $this->environment = $environment;
+
+        if (!(is_string($rootDirectory) && is_dir($rootDirectory))) {
+            $message = sprintf('"%s" is not a valid directory', print_r($rootDirectory, true));
+            throw new \InvalidArgumentException($message);
+        }
+        $this->rootDirectory = realpath($rootDirectory);
     }
 
     /**
@@ -50,6 +61,14 @@ class Bootstrap
     public function getEnvironment()
     {
         return $this->environment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRootDirectory()
+    {
+        return $this->rootDirectory;
     }
 
     /**
