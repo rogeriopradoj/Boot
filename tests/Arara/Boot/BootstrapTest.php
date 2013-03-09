@@ -8,14 +8,28 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Arara\Boot\Bootstrap::__construct
      */
-    public function testMustHaveConfigAndEnvironmentOnConstructor()
+    public function testShouldHaveConfigEnvironmentAndRootDirectoryOnConstructor()
     {
         $config = array('foo' => 'bar');
         $environment = 'live';
-        $bootstrap = new Bootstrap($config, $environment);
+        $rootDirectory = __DIR__ . '/.';
+        $bootstrap = new Bootstrap($config, $environment, $rootDirectory);
 
         $this->assertAttributeEquals(new Config($config), 'config', $bootstrap);
         $this->assertAttributeSame($environment, 'environment', $bootstrap);
+        $this->assertAttributeSame(realpath($rootDirectory), 'rootDirectory', $bootstrap);
+    }
+
+    /**
+     * @covers Arara\Boot\Bootstrap::__construct
+     * @expectedException InvalidArgumentException
+     */
+    public function testShouldThrowAnExceptionIfAnInvalidRootDirectoryIsDefined()
+    {
+        $config = array();
+        $environment = 'live';
+        $rootDirectory = __DIR__ . '89876rtuygjhbytfcvbhu876ryfghvj';
+        new Bootstrap($config, $environment, $rootDirectory);
     }
 
     /**
@@ -24,7 +38,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     public function testShouldGetTheDefinedConfig()
     {
         $config = array('foo' => 'bar');
-        $bootstrap = new Bootstrap($config, 'live');
+        $bootstrap = new Bootstrap($config, 'live', __DIR__);
 
         $this->assertEquals(new Config($config), $bootstrap->getConfig());
     }
@@ -35,9 +49,20 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     public function testShouldGetTheDefinedEnvironment()
     {
         $environment = 'chimichanga';
-        $bootstrap = new Bootstrap(array(), $environment);
+        $bootstrap = new Bootstrap(array(), $environment, __DIR__);
 
         $this->assertSame($environment, $bootstrap->getEnvironment());
+    }
+
+    /**
+     * @covers Arara\Boot\Bootstrap::getRootDirectory
+     */
+    public function testShouldGetTheDefinedRootDirectory()
+    {
+        $environment = 'chimichanga';
+        $bootstrap = new Bootstrap(array(), $environment, __DIR__);
+
+        $this->assertSame(__DIR__, $bootstrap->getRootDirectory());
     }
 
     /**
@@ -45,7 +70,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldGetAProviderLoader()
     {
-        $bootstrap = new Bootstrap(array(), 'live');
+        $bootstrap = new Bootstrap(array(), 'live', __DIR__);
 
         $this->assertInstanceOf('Arara\Boot\Provider\Loader', $bootstrap->getProviderLoader());
     }
@@ -89,7 +114,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testMustThrowsAnExceptionWhenCallbackIsNotValid()
     {
-        $bootstrap = new Bootstrap(array(), 'live');
+        $bootstrap = new Bootstrap(array(), 'live', __DIR__);
         $bootstrap->run(array(1, 2, 3, 4, 5));
     }
 
@@ -101,7 +126,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $name = 'myProvider';
         $provider = $this->getMock('Arara\Boot\Provider\Provider', array('__construct',  '__invoke'));
 
-        $bootstrap = new Bootstrap(array(), 'live');
+        $bootstrap = new Bootstrap(array(), 'live', __DIR__);
 
         $loader = $this->getMock('\Arara\Boot\Provider\Loader', array('get'));
         $loader->expects($this->any())

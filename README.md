@@ -13,9 +13,10 @@ Autoloading with composer is PSR-0 compatible.
 ### Basic usage
 
 ````php
-$config      = array('title' => 'Arara\Boot');
-$environment = 'demo';
-$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
+$config         = array('title' => 'Arara\Boot');
+$environment    = 'demo';
+$rootDirectory  = getcwd();
+$bootstrap      = new Arara\Boot\Bootstrap($config, $environment, $rootDirectory);
 $bootstrap->run(function ($bootstrap) {
     echo 'Do what you want with ' . $bootstrap->getConfig()->title . PHP_EOL;
 });
@@ -26,7 +27,7 @@ $bootstrap->run(function ($bootstrap) {
 ````php
 $config = parse_ini_file('settings.ini');
 $environment = 'demo';
-$bootstrap   = new Arara\Boot\Bootstrap($config, $environment);
+$bootstrap   = new Arara\Boot\Bootstrap($config, $environment, __DIR__ . '/../');
 $bootstrap->run(function ($bootstrap) {
     $content = '';
     switch ($_SERVER['REQUEST_METHOD']) {
@@ -110,7 +111,8 @@ $bootstrap = new Arara\Boot\Bootstrap(
             'Application_Model' => '/path/of/application/models',
         )
     ),
-    'demo'
+    'demo',
+    __DIR__
 );
 $bootstrap->run();
 
@@ -136,7 +138,8 @@ $bootstrap = new Arara\Boot\Bootstrap(
             'options' => array(PDO::ATTR_PERSISTENT => false),
         )
     ),
-    'demo'
+    'demo',
+    __DIR__
 );
 $bootstrap->run();
 
@@ -161,7 +164,8 @@ $bootstrap = new Arara\Boot\Bootstrap(
             )
         )
     ),
-    getenv('APPLICATION_ENV') ?: 'dev'
+    getenv('APPLICATION_ENV') ?: 'dev',
+    __DIR__ . '/../'
 );
 $bootstrap->run(function ($bootstrap) {
 
